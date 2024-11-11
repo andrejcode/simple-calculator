@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simple Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/main.css">
 </head>
 
@@ -12,29 +15,29 @@
   <main class="calculator">
     <div id="display">0</div>
 
-    <button value="AC">AC</button>
-    <button value="C">C</button>
-    <button value="±">&plusmn;</button>
-    <button value="/">&divide;</button>
+    <button value="AC" class="light-gray-button">AC</button>
+    <button value="C" class="light-gray-button">C</button>
+    <button value="±" class="light-gray-button">&plusmn;</button>
+    <button value="/" class="orange-button">&divide;</button>
 
     <button value="7">7</button>
     <button value="8">8</button>
     <button value="9">9</button>
-    <button value="*">&times;</button>
+    <button value="*" class="orange-button">&times;</button>
 
     <button value="4">4</button>
     <button value="5">5</button>
     <button value="6">6</button>
-    <button value="-">&minus;</button>
+    <button value="-" class="orange-button">&minus;</button>
 
     <button value="1">1</button>
     <button value="2">2</button>
     <button value="3">3</button>
-    <button value="+">&plus;</button>
+    <button value="+" class="orange-button">&plus;</button>
 
     <button value="0">0</button>
     <button value=".">.</button>
-    <button value="=">=</button>
+    <button value="=" class="orange-button">=</button>
   </main>
 
   <script src="./js/main.js" type="module"></script>

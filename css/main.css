@@ -1,8 +1,22 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  font-family: "Roboto", serif;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #1c1c1c;
 }
 
 .calculator {
@@ -10,23 +24,53 @@ body {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto repeat(5, 1fr);
   gap: 10px;
-  max-width: 340px;
+  max-width: 320px;
 }
 
 #display {
   grid-column: span 4;
-  background-color: #f5f5f5;
+  background-color: #505050;
+  color: #fff;
   padding: 20px;
-  font-size: 32px;
+  font-size: 2rem;
   text-align: right;
   overflow: hidden;
 }
 
-button {
-  font-size: 24px;
+.calculator button {
+  cursor: pointer;
+  border: none;
+  font-size: 1.5rem;
   padding: 20px;
+  font-family: "Roboto", serif;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #505050;
+  color: #fff;
 }
 
-button[value="0"] {
+.calculator button:active {
+  background-color: #3b3b3b;
+}
+
+.calculator button[value="0"] {
   grid-column: span 2;
+}
+
+button.light-gray-button {
+  background-color: #d4d4d2;
+  color: #1c1c1c;
+}
+
+button.light-gray-button:active {
+  background-color: #bfbfbf;
+}
+
+button.orange-button {
+  background-color: #ff9500;
+  color: #fff;
+}
+
+button.orange-button:active {
+  background-color: #cc7a00;
 }
