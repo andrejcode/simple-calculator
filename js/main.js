@@ -3,13 +3,11 @@ import { calculate } from './operations.js';
 const buttons = document.querySelectorAll('.calculator button');
 const display = document.getElementById('display');
 
-// These are the Variables to store values
 let firstOperand = '';
 let secondOperand = '';
 let currentOperator = null;
 let shouldResetDisplay = false;
 
-// Display functions
 function clearDisplay() {
   display.textContent = '0';
   firstOperand = '';
@@ -81,7 +79,6 @@ function handleInput(value) {
   }
 }
 
-// Button click events
 buttons.forEach((button) => {
   button.addEventListener('click', () => handleInput(button.value));
 });
