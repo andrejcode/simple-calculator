@@ -65,23 +65,36 @@ function deleteNumber() {
   if (display.textContent === '') display.textContent = '0';
 }
 
+function handleInput(value) {
+  if (value >= '0' && value <= '9') {
+    appendNumber(value);
+  } else if (value === '.') {
+    appendPoint();
+  } else if (value === 'AC') {
+    clearDisplay();
+  } else if (value === 'C') {
+    deleteNumber();
+  } else if (value === '=') {
+    evaluate();
+  } else {
+    setOperation(value);
+  }
+}
+
 // Button click events
 buttons.forEach((button) => {
-  button.addEventListener('click', () => {
-    const value = button.value;
-
-    if (value >= '0' && value <= '9') {
-      appendNumber(value);
-    } else if (value === '.') {
-      appendPoint();
-    } else if (value === 'AC') {
-      clearDisplay();
-    } else if (value === 'C') {
-      deleteNumber();
-    } else if (value === '=') {
-      evaluate();
-    } else {
-      setOperation(value);
-    }
-  });
+  button.addEventListener('click', () => handleInput(button.value));
 });
+
+document.onkeydown = (event) => {
+  const validKeys = /^[\d+\-*/=]$/;
+  if (validKeys.test(event.key)) {
+    handleInput(event.key);
+  } else if (event.key === 'Delete') {
+    handleInput('AC');
+  } else if (event.key === 'Backspace') {
+    handleInput('C');
+  } else if (event.key === 'Enter') {
+    handleInput('=');
+  }
+};
