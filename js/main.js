@@ -4,49 +4,16 @@ const buttons = document.querySelectorAll('.calculator button');
 const display = document.getElementById('display');
 
 // These are the Variables to store values
-let firstOpera = '';
-let secondOpera = '';
+let firstOperand = '';
+let secondOperand = '';
 let currentOperator = null;
 let shouldResetDisplay = false;
-
-// Simple operation functions
-function add(a, b) {
-  return a + b;
-}
-function subtract(a, b) {
-  return a - b;
-}
-function multiply(a, b) {
-  return a * b;
-}
-function divide(a, b) {
-  if (b === 0) return 'Error!';
-  return a / b;
-}
-
-// This function performs the calculation
-function operate(operator, a, b) {
-  a = parseFloat(a);
-  b = parseFloat(b);
-  switch (operator) {
-    case '+':
-      return add(a, b);
-    case '-':
-      return subtract(a, b);
-    case '*':
-      return multiply(a, b);
-    case '/':
-      return divide(a, b);
-    default:
-      return null;
-  }
-}
 
 // Display functions
 function clearDisplay() {
   display.textContent = '0';
-  firstOpera = '';
-  secondOpera = '';
+  firstOperand = '';
+  secondOperand = '';
   currentOperator = null;
   shouldResetDisplay = false;
 }
@@ -62,7 +29,7 @@ function appendNumber(number) {
 
 function setOperation(operator) {
   if (currentOperator !== null) evaluate();
-  firstOpera = display.textContent;
+  firstOperand = parseFloat(display.textContent);
   currentOperator = operator;
   shouldResetDisplay = true;
 }
@@ -73,9 +40,9 @@ function evaluate() {
     display.textContent = 'Error!';
     return;
   }
-  secondOpera = display.textContent;
+  secondOperand = parseFloat(display.textContent);
   display.textContent = roundResult(
-    operate(currentOperator, firstOpera, secondOpera)
+    calculate(currentOperator, firstOperand, secondOperand)
   );
   currentOperator = null;
 }

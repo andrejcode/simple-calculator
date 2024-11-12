@@ -6,7 +6,7 @@ const multiply = (firstNumber, secondNumber) => firstNumber * secondNumber;
 
 const divide = (firstNumber, secondNumber) => {
   if (secondNumber === 0) {
-    throw new Error('Cannot divide by zero');
+    throw new Error('Cannot divide by zero.');
   }
 
   return firstNumber / secondNumber;
