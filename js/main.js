@@ -36,15 +36,15 @@ function setOperation(operator) {
 
 function evaluate() {
   if (currentOperator === null || shouldResetDisplay) return;
-  if (currentOperator === '/' && display.textContent === '0') {
-    display.textContent = 'Error!';
-    return;
+  try {
+    secondOperand = parseFloat(display.textContent);
+    display.textContent = roundResult(
+      calculate(currentOperator, firstOperand, secondOperand)
+    );
+    currentOperator = null;
+  } catch (error) {
+    display.textContent = error.message;
   }
-  secondOperand = parseFloat(display.textContent);
-  display.textContent = roundResult(
-    calculate(currentOperator, firstOperand, secondOperand)
-  );
-  currentOperator = null;
 }
 
 // Rounds results to fit with display limitations
