@@ -38,7 +38,7 @@ function evaluate() {
   if (currentOperator === null || shouldResetDisplay) return;
   try {
     secondOperand = parseFloat(display.textContent);
-    display.textContent = roundResult(
+    display.textContent = formatResult(
       calculate(currentOperator, firstOperand, secondOperand)
     );
     currentOperator = null;
@@ -47,12 +47,12 @@ function evaluate() {
   }
 }
 
-// Rounds results to fit with display limitations
-function roundResult(number) {
-  if (number.toString().length > 10) {
-    return parseFloat(number).toExponential(5);
+function formatResult(result) {
+  if (Math.abs(result) >= 1e9 || Math.abs(result) < 1e-9) {
+    return result.toExponential(9);
+  } else {
+    return Math.round(result * 1e9) / 1e9;
   }
-  return Math.round(number * 1000) / 1000; // Rounds to 3 decimal places if within normal range
 }
 
 function appendPoint() {
