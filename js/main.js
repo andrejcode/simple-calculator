@@ -41,11 +41,12 @@ function evaluate() {
     shouldResetDisplay = true;
   } catch (error) {
     display.textContent = error.message;
+    shouldResetDisplay = true;
   }
 }
 
 function formatResult(result) {
-  if (Math.abs(result) >= 1e9 || Math.abs(result) < 1e-9) {
+  if (result !== 0 && (Math.abs(result) >= 1e9 || Math.abs(result) < 1e-9)) {
     return result.toExponential(9);
   } else {
     return `${Math.round(result * 1e9) / 1e9}`;
