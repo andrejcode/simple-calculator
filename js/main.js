@@ -39,12 +39,12 @@ function evaluate() {
   try {
     const result = calculate(currentOperator, firstOperand, secondOperand);
     display.textContent = formatResult(result);
-    currentOperator = null;
-    shouldResetDisplay = true;
   } catch (error) {
     display.textContent = error.message;
     toggleErrorSensitiveButtons(true);
+  } finally {
     shouldResetDisplay = true;
+    currentOperator = null;
   }
 }
 
