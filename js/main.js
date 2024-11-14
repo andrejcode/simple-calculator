@@ -2,6 +2,7 @@ import { calculate } from './operations.js';
 
 const buttons = document.querySelectorAll('.calculator button');
 const display = document.getElementById('display');
+const errorSensitiveButtons = document.querySelectorAll('.disable-on-error');
 
 let firstOperand = '';
 let currentOperator = null;
@@ -41,6 +42,7 @@ function evaluate() {
     shouldResetDisplay = true;
   } catch (error) {
     display.textContent = error.message;
+    toggleErrorSensitiveButtons(true);
     shouldResetDisplay = true;
   }
 }
@@ -54,7 +56,7 @@ function formatResult(result) {
 }
 
 function appendPoint() {
-  if (shouldResetDisplay) resetDisplay();
+  if (shouldResetDisplay) clearDisplay();
   if (!display.textContent.includes('.')) display.textContent += '.';
 }
 
@@ -63,15 +65,25 @@ function deleteNumber() {
   if (display.textContent === '') display.textContent = '0';
 }
 
+function toggleErrorSensitiveButtons(disabled) {
+  errorSensitiveButtons.forEach((button) => {
+    button.disabled = disabled;
+  });
+}
+
 function handleInput(value) {
   if (isNumber(value)) {
     appendNumber(value);
+    toggleErrorSensitiveButtons(false);
   } else if (value === '.') {
     appendPoint();
+    toggleErrorSensitiveButtons(false);
   } else if (value === 'AC') {
     clearDisplay();
+    toggleErrorSensitiveButtons(false);
   } else if (value === 'C') {
     deleteNumber();
+    toggleErrorSensitiveButtons(false);
   } else if (value === '=') {
     evaluate();
   } else if (isOperator(value)) {

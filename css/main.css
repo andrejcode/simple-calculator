@@ -53,6 +53,16 @@ body {
   background-color: #3b3b3b;
 }
 
+.calculator button.selected {
+  background-color: #fff;
+  color: #ff9500;
+}
+
+.calculator button:disabled {
+  background-color: #3b3b3b;
+  opacity: 0.5;
+}
+
 .calculator button[value="0"] {
   grid-column: span 2;
 }
