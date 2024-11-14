@@ -62,8 +62,8 @@ function appendPoint() {
 }
 
 function deleteNumber() {
-  display.textContent = display.textContent.slice(0, -1);
-  if (display.textContent === '') display.textContent = '0';
+  display.textContent =
+    display.textContent.length > 1 ? display.textContent.slice(0, -1) : '0';
 }
 
 function toggleOperandSign() {
@@ -100,7 +100,7 @@ function handleInput(value) {
   } else if (value === 'AC') {
     clearDisplay();
     toggleErrorSensitiveButtons(false);
-  } else if (value === 'C') {
+  } else if (value === 'Backspace') {
     deleteNumber();
     toggleErrorSensitiveButtons(false);
   } else if (value === '=') {
@@ -129,7 +129,7 @@ document.onkeydown = (event) => {
   } else if (event.key === 'Delete') {
     handleInput('AC');
   } else if (event.key === 'Backspace') {
-    handleInput('C');
+    handleInput('Backspace');
   } else if (event.key === 'Enter') {
     handleInput('=');
   }
