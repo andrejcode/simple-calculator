@@ -66,6 +66,12 @@ function deleteNumber() {
   if (display.textContent === '') display.textContent = '0';
 }
 
+function toggleOperandSign() {
+  const value = display.textContent;
+  if (value === '0') return;
+  display.textContent = Number(value) > 0 ? `-${value}` : value.slice(1);
+}
+
 function toggleErrorSensitiveButtons(disabled) {
   errorSensitiveButtons.forEach((button) => {
     button.disabled = disabled;
@@ -89,6 +95,8 @@ function handleInput(value) {
   } else if (value === '.') {
     appendPoint();
     toggleErrorSensitiveButtons(false);
+  } else if (value === '±') {
+    toggleOperandSign();
   } else if (value === 'AC') {
     clearDisplay();
     toggleErrorSensitiveButtons(false);
