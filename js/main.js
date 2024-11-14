@@ -29,6 +29,7 @@ function setOperation(operator) {
   firstOperand = parseFloat(display.textContent);
   currentOperator = operator;
   shouldResetDisplay = true;
+  toggleOperationButton(operator, true);
 }
 
 function evaluate() {
@@ -71,7 +72,17 @@ function toggleErrorSensitiveButtons(disabled) {
   });
 }
 
+function toggleOperationButton(buttonValue, isSelected) {
+  const button = document.querySelector(`button[value="${buttonValue}"]`);
+  if (button) {
+    button.classList.toggle('selected', isSelected);
+  }
+}
+
 function handleInput(value) {
+  if (currentOperator !== null) {
+    toggleOperationButton(currentOperator, false);
+  }
   if (isNumber(value)) {
     appendNumber(value);
     toggleErrorSensitiveButtons(false);
