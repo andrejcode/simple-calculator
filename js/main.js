@@ -4,14 +4,12 @@ const buttons = document.querySelectorAll('.calculator button');
 const display = document.getElementById('display');
 
 let firstOperand = '';
-let secondOperand = '';
 let currentOperator = null;
 let shouldResetDisplay = false;
 
 function clearDisplay() {
   display.textContent = '0';
   firstOperand = '';
-  secondOperand = '';
   currentOperator = null;
   shouldResetDisplay = false;
 }
@@ -34,12 +32,13 @@ function setOperation(operator) {
 
 function evaluate() {
   if (currentOperator === null || shouldResetDisplay) return;
+
+  const secondOperand = parseFloat(display.textContent);
   try {
-    secondOperand = parseFloat(display.textContent);
-    display.textContent = formatResult(
-      calculate(currentOperator, firstOperand, secondOperand)
-    );
+    const result = calculate(currentOperator, firstOperand, secondOperand);
+    display.textContent = formatResult(result);
     currentOperator = null;
+    shouldResetDisplay = true;
   } catch (error) {
     display.textContent = error.message;
   }
@@ -49,7 +48,7 @@ function formatResult(result) {
   if (Math.abs(result) >= 1e9 || Math.abs(result) < 1e-9) {
     return result.toExponential(9);
   } else {
-    return Math.round(result * 1e9) / 1e9;
+    return `${Math.round(result * 1e9) / 1e9}`;
   }
 }
 
@@ -64,7 +63,7 @@ function deleteNumber() {
 }
 
 function handleInput(value) {
-  if (value >= '0' && value <= '9') {
+  if (isNumber(value)) {
     appendNumber(value);
   } else if (value === '.') {
     appendPoint();
@@ -74,9 +73,17 @@ function handleInput(value) {
     deleteNumber();
   } else if (value === '=') {
     evaluate();
-  } else {
+  } else if (isOperator(value)) {
     setOperation(value);
   }
+}
+
+function isNumber(value) {
+  return value >= '0' && value <= '9';
+}
+
+function isOperator(value) {
+  return ['+', '-', '*', '/'].includes(value);
 }
 
 buttons.forEach((button) => {
