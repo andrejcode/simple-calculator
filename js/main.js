@@ -8,7 +8,7 @@ let firstOperand = '';
 let currentOperator = null;
 let shouldResetDisplay = false;
 
-function clearDisplay() {
+function resetCalculator() {
   display.textContent = '0';
   firstOperand = '';
   currentOperator = null;
@@ -49,7 +49,7 @@ function evaluate() {
 }
 
 function appendPoint() {
-  if (shouldResetDisplay) clearDisplay();
+  if (shouldResetDisplay) resetCalculator();
   if (!display.textContent.includes('.')) display.textContent += '.';
 }
 
@@ -106,7 +106,7 @@ function handleInput(value) {
   } else if (value === '±') {
     toggleOperandSign();
   } else if (value === 'AC') {
-    clearDisplay();
+    resetCalculator();
     toggleErrorSensitiveButtons(false);
   } else if (value === 'Backspace') {
     deleteNumber();
