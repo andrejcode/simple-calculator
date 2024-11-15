@@ -48,14 +48,6 @@ function evaluate() {
   }
 }
 
-function formatResult(result) {
-  if (result !== 0 && (Math.abs(result) >= 1e9 || Math.abs(result) < 1e-9)) {
-    return result.toExponential(9);
-  } else {
-    return `${Math.round(result * 1e9) / 1e9}`;
-  }
-}
-
 function appendPoint() {
   if (shouldResetDisplay) clearDisplay();
   if (!display.textContent.includes('.')) display.textContent += '.';
@@ -85,6 +77,22 @@ function toggleOperationButton(buttonValue, isSelected) {
   }
 }
 
+function isNumber(value) {
+  return value >= '0' && value <= '9';
+}
+
+function isOperator(value) {
+  return ['+', '-', '*', '/'].includes(value);
+}
+
+function formatResult(result) {
+  if (result !== 0 && (Math.abs(result) >= 1e9 || Math.abs(result) < 1e-9)) {
+    return result.toExponential(9);
+  } else {
+    return `${Math.round(result * 1e9) / 1e9}`;
+  }
+}
+
 function handleInput(value) {
   if (currentOperator !== null) {
     toggleOperationButton(currentOperator, false);
@@ -108,14 +116,6 @@ function handleInput(value) {
   } else if (isOperator(value)) {
     setOperation(value);
   }
-}
-
-function isNumber(value) {
-  return value >= '0' && value <= '9';
-}
-
-function isOperator(value) {
-  return ['+', '-', '*', '/'].includes(value);
 }
 
 buttons.forEach((button) => {
