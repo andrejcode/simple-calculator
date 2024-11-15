@@ -24,16 +24,18 @@ body {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto repeat(5, 1fr);
   gap: 10px;
-  max-width: 320px;
+  width: 320px;
 }
 
 #display {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   grid-column: span 4;
   background-color: #505050;
   color: #fff;
   padding: 20px;
   font-size: 2rem;
-  text-align: right;
   overflow: hidden;
 }
 
