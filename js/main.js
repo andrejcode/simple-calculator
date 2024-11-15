@@ -123,16 +123,12 @@ buttons.forEach((button) => {
 });
 
 document.onkeydown = (event) => {
-  const validKeys = /^[\d+\-*/=]$/;
+  const validKeys = /^[\d+\-*/=.]$|^Backspace$/;
   if (validKeys.test(event.key)) {
     handleInput(event.key);
   } else if (event.key === 'Delete') {
     handleInput('AC');
-  } else if (event.key === 'Backspace') {
-    handleInput('Backspace');
   } else if (event.key === 'Enter') {
     handleInput('=');
-  } else if (event.key === '.') {
-    handleInput('.');
   }
 };
