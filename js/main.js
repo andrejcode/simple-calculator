@@ -99,6 +99,7 @@ function handleInput(value) {
   if (currentOperator !== null) {
     toggleOperationButton(currentOperator, false);
   }
+
   if (isNumber(value)) {
     appendNumber(value);
     toggleErrorSensitiveButtons(false);
@@ -107,13 +108,13 @@ function handleInput(value) {
     toggleErrorSensitiveButtons(false);
   } else if (value === '±') {
     toggleOperandSign();
-  } else if (value === 'AC') {
+  } else if (value === 'AC' || value === 'Delete') {
     resetCalculator();
     toggleErrorSensitiveButtons(false);
   } else if (value === 'Backspace') {
     deleteNumber();
     toggleErrorSensitiveButtons(false);
-  } else if (value === '=') {
+  } else if (value === '=' || value === 'Enter') {
     evaluate();
   } else if (isOperator(value)) {
     setOperation(value);
@@ -124,13 +125,4 @@ buttons.forEach((button) => {
   button.addEventListener('click', () => handleInput(button.value));
 });
 
-document.onkeydown = (event) => {
-  const validKeys = /^[\d+\-*/=.]$|^Backspace$/;
-  if (validKeys.test(event.key)) {
-    handleInput(event.key);
-  } else if (event.key === 'Delete') {
-    handleInput('AC');
-  } else if (event.key === 'Enter') {
-    handleInput('=');
-  }
-};
+document.onkeydown = (event) => handleInput(event.key);
