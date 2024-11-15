@@ -132,5 +132,7 @@ document.onkeydown = (event) => {
     handleInput('Backspace');
   } else if (event.key === 'Enter') {
     handleInput('=');
+  } else if (event.key === '.') {
+    handleInput('.');
   }
 };
