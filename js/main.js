@@ -85,6 +85,8 @@ function isOperator(value) {
   return ['+', '-', '*', '/'].includes(value);
 }
 
+// Extremely large or small numbers are displayed in scientific notation to maintain readability.
+// Moderately sized numbers are rounded to a maximum of 9 decimal places for precision and clarity.
 function formatResult(result) {
   if (result !== 0 && (Math.abs(result) >= 1e9 || Math.abs(result) < 1e-9)) {
     return result.toExponential(9);
