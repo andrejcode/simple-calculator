@@ -56,6 +56,10 @@ function appendPoint() {
 function deleteNumber() {
   display.textContent =
     display.textContent.length > 1 ? display.textContent.slice(0, -1) : '0';
+
+  if (display.textContent === '-') {
+    display.textContent = '0';
+  }
 }
 
 function toggleOperandSign() {
